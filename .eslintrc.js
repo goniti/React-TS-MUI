@@ -1,5 +1,8 @@
 module.exports = {
     root: true,
+    env: {
+        browser: true,
+    },
     globals: {
         BodyInit: true,
         EventListener: true,
@@ -7,6 +10,7 @@ module.exports = {
         HeadersInit: true,
         RequestInit: true,
         ScrollBehavior: true,
+        JSX: true,
     },
     settings: {
         'import/resolver': {
@@ -18,9 +22,20 @@ module.exports = {
                 extensions: ['.ts', '.tsx', '.js'],
             },
         },
+        react: {
+            version: 'detect',
+        },
     },
-    extends: ['prettier', 'eslint:recommended', 'plugin:@typescript-eslint/recommended', 'airbnb-base'],
-    plugins: ['prettier', '@typescript-eslint'],
+    extends: [
+        'prettier',
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'airbnb-base',
+        'plugin:react/recommended',
+        'plugin:react-hooks/recommended',
+        'plugin:react/jsx-runtime',
+    ],
+    plugins: ['react', 'prettier', '@typescript-eslint'],
     parser: '@typescript-eslint/parser',
     rules: {
         '@typescript-eslint/ban-ts-comment': ['error', { 'ts-ignore': 'allow-with-description' }],
@@ -28,7 +43,7 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
         'arrow-body-style': 'off',
         'class-methods-use-this': 'off',
-        'import/extensions': ['error', 'always', { js: 'ignorePackages', ts: 'never' }],
+        'import/extensions': ['error', 'always', { js: 'ignorePackages', ts: 'never', tsx: 'never' }],
         'import/prefer-default-export': 'off',
         indent: ['error', 4],
         'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
@@ -38,11 +53,10 @@ module.exports = {
         'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
         'no-use-before-define': ['error', { functions: false }],
         'object-curly-newline': ['error', { ImportDeclaration: 'never' }],
-        semi: ['error', 'never', { beforeStatementContinuationChars: 'always' }],
+        'operator-linebreak': 'off',
         'dot-notation': ['error', { allowPattern: '^[a-z]+(__[a-z]+)*(--[a-z]+)*$' }],
         // prefer "<></>" syntax over <React.Fragment></React.Fragment>
         'react/jsx-fragments': ['error', 'syntax'],
-
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'warn',
         'react/prefer-stateless-function': ['error', { ignorePureComponents: true }],
