@@ -13,7 +13,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "format:check": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "lint": "npm run lint:js && npm run lint:ts && npm run lint:md",
+    "lint:js": "eslint ./src ./tests/specs --ext .ts,.tsx",
+    "lint:ts": "tsc --noemit",
+    "lint:md": "markdownlint *.md --ignore node_modules"
   },
   "eslintConfig": {
     "extends": [
@@ -53,6 +59,8 @@
     "eslint-plugin-react": "7.31.8",
     "eslint-plugin-react-hooks": "4.6.0",
     "husky": "8.0.1",
+    "markdownlint-cli": "0.32.2",
+    "prettier": "2.7.1",
     "typescript": "4.8.3"
   }
 }
