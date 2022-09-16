@@ -37,14 +37,18 @@ module.exports = {
     ],
     plugins: ['react', 'prettier', '@typescript-eslint'],
     parser: '@typescript-eslint/parser',
+    parserOptions: {
+        project: './tsconfig.json',
+    },
     rules: {
         '@typescript-eslint/ban-ts-comment': ['error', { 'ts-ignore': 'allow-with-description' }],
         '@typescript-eslint/no-shadow': 'error',
         '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
         'arrow-body-style': 'off',
         'class-methods-use-this': 'off',
-        'import/extensions': ['error', 'always', { js: 'ignorePackages', ts: 'never', tsx: 'never' }],
+        'import/extensions': ['error', 'always', { js: 'ignorePackages', jsx: 'never', ts: 'never', tsx: 'never' }],
         'import/prefer-default-export': 'off',
+        'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
         indent: ['error', 4],
         'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
         'max-len': ['error', { code: 200, ignoreComments: true }],
@@ -57,6 +61,8 @@ module.exports = {
         'dot-notation': ['error', { allowPattern: '^[a-z]+(__[a-z]+)*(--[a-z]+)*$' }],
         // prefer "<></>" syntax over <React.Fragment></React.Fragment>
         'react/jsx-fragments': ['error', 'syntax'],
+        'react/jsx-uses-react': 'error',
+        'react/jsx-uses-vars': 'error',
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'warn',
         'react/prefer-stateless-function': ['error', { ignorePureComponents: true }],

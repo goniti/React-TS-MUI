@@ -1,11 +1,16 @@
-body {
-    margin: 0;
+import { createGlobalStyle } from 'styled-components';
+import { normalize } from 'styled-normalize';
+
+export default createGlobalStyle`
+${normalize}
+
+  body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-        'Droid Sans', 'Helvetica Neue', sans-serif;
+    'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
-
-code {
+  }
+  code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+`;

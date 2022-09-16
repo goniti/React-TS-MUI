@@ -23,7 +23,7 @@
         "strict": true,
         "baseUrl": ".",
         "paths": {
-            "app/*": ["src/app/*"],
+            "app/*": ["src/components/App/*"],
             "assets/*": ["src/assets/*"]
         }
     },
