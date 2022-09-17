@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
+
+type DataJSONValue = string | number | boolean | { [x: string]: DataJSONValue };
+
 /**
  *
  * @param url
  * @returns [data, isLoading, isError]
  */
 const useFetch = (url: string) => {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<DataJSONValue>({});
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);
 
@@ -24,6 +27,7 @@ const useFetch = (url: string) => {
                 const json = await response.json();
 
                 if (isSubscribed) {
+                    setIsError(false);
                     setData(json);
                 }
             } catch (error) {
