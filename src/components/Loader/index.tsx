@@ -11,6 +11,13 @@ const rotate360 = keyframes`
 `;
 
 const LoaderWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+`;
+
+const Spinned = styled.div`
     animation: ${rotate360} 1s linear infinite;
     transform: translateZ(0);
 
@@ -25,7 +32,11 @@ const LoaderWrapper = styled.div`
 `;
 
 const Loader = (): JSX.Element => {
-    return <LoaderWrapper />;
+    return (
+        <LoaderWrapper>
+            <Spinned />
+        </LoaderWrapper>
+    );
 };
 
 export { Loader };

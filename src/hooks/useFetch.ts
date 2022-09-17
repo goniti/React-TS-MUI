@@ -1,37 +1,43 @@
 import { useState, useEffect } from 'react';
 
-type DataJSONValue = string | number | boolean | { [x: string]: DataJSONValue };
-
+const ERROR_CODES: number[] = [400, 404];
+type DataJSONValue = { [x: string]: DataJSONValue } | null;
 /**
  *
  * @param url
  * @returns [data, isLoading, isError]
  */
-const useFetch = (url: string) => {
-    const [data, setData] = useState<DataJSONValue>({});
+const useFetch = (url: string): Array<DataJSONValue | boolean | string> => {
+    const [data, setData] = useState<DataJSONValue>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);
+    const [errorMsg, setErrorMsg] = useState<string>('');
 
     useEffect(() => {
         // initialValue of the subscription
         let isSubscribed = true;
 
-        setIsLoading(true);
-
         const fetchData = async () => {
+            setIsLoading(true);
             try {
                 const response = await fetch(url);
                 if (!response.ok) {
-                    throw new Error(response.statusText);
+                    Promise.reject();
                 }
                 const json = await response.json();
+
+                if (ERROR_CODES.includes(json.code)) {
+                    setErrorMsg(json.msg);
+                    setIsError(true);
+                    return;
+                }
 
                 if (isSubscribed) {
                     setIsError(false);
                     setData(json);
                 }
-            } catch (error) {
-                console.error(error);
+            } catch (err) {
+                console.error(err);
                 setIsError(true);
             } finally {
                 setIsLoading(false);
@@ -46,7 +52,7 @@ const useFetch = (url: string) => {
         };
     }, [url]);
 
-    return [data, isLoading, isError];
+    return [data, isLoading, isError, errorMsg];
 };
 
 export default useFetch;

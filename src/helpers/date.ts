@@ -13,4 +13,8 @@ const formatDate = (date: Date): string => {
     return format(date, DATE_FORMAT);
 };
 
-export { formatDate };
+const today = new Date();
+const yesterday = new Date();
+yesterday.setDate(today.getDate() - 1);
+
+export { formatDate, yesterday };
