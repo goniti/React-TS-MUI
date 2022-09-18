@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { color } from '../../styles/color';
 
 const rotate360 = keyframes`
   from {
@@ -21,10 +22,10 @@ const Spinned = styled.div`
     animation: ${rotate360} 1s linear infinite;
     transform: translateZ(0);
 
-    border-top: 2px solid grey;
-    border-right: 2px solid grey;
-    border-bottom: 2px solid grey;
-    border-left: 4px solid black;
+    border-top: 2px solid ${color.primary};
+    border-right: 2px solid ${color.primary};
+    border-bottom: 2px solid ${color.primary};
+    border-left: 3px solid ${color.secondary};
     background: transparent;
     width: 24px;
     height: 24px;
