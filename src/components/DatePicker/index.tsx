@@ -4,10 +4,26 @@ import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import styled from 'styled-components';
 import { color } from '../../styles/color';
+import { vars } from '../../styles/vars';
 
 const DatePickerWrapper = styled(ReactDatePicker)`
-    border-radius: 4px;
-    border: 1px solid ${color.primary};
+    margin-bottom: ${vars.gutter};
+    background-color: ${color.secondary};
+    color: ${color.light};
+    padding: 7px 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: 14px;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid ${color.light};
+    border-left: 0;
+    transition: border-bottom-color 0.25s ease-in;
+
+    &:focus {
+        border-bottom-color: ${color.primary};
+        outline: 0;
+    }
 `;
 
 interface DatePickerProps {
