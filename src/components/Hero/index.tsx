@@ -6,18 +6,18 @@ const propTypes = {
     children: PropTypes.node.isRequired,
 };
 
-const ContainerStyled = styled.div`
+const HeroStyled = styled.div`
     display: flex;
     align-items: center;
-    width: 30vw;
-    height: 100%;
     flex-direction: column;
+    width: 100%;
+    height: 75%;
 `;
 
-const Container: FC<InferProps<typeof propTypes>> = ({ children }): JSX.Element => {
-    return <ContainerStyled>{children}</ContainerStyled>;
+const Hero: FC<InferProps<typeof propTypes>> = ({ children }): JSX.Element => {
+    return <HeroStyled>{children}</HeroStyled>;
 };
 
-Container.propTypes = propTypes;
+Hero.propTypes = propTypes;
 
-export { Container };
+export { Hero };
