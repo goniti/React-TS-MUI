@@ -91,8 +91,7 @@ const CardContent = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 ${vars.bigGutter};
-    margin-bottom: 10rem;
+    margin: 0rem 2rem 2rem 2rem;
 `;
 
 const CardContentDescription = styled.p`
@@ -112,9 +111,30 @@ const CardContentCallToAction = styled.button`
     border: none;
     font-weight: 500;
     text-transform: uppercase;
-    margin-top: 2rem;
+    //margin-top: 2rem;
+    padding: 0;
     width: max-content;
     cursor: pointer;
+    display: inline-block;
+    position: relative;
+    &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: ${color.primary};
+        transform-origin: bottom right;
+        transition: transform 0.25s ease-out;
+    }
+    &:hover {
+        &::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+    }
 `;
 
 const CardContentMoreDescriptionWrapper = styled.p`

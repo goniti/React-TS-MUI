@@ -11,7 +11,6 @@ const HeroStyled = styled.div`
     align-items: center;
     flex-direction: column;
     width: 100%;
-    height: 75%;
 `;
 
 const Hero: FC<InferProps<typeof propTypes>> = ({ children }): JSX.Element => {
