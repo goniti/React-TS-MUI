@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import PropTypes, { InferProps } from 'prop-types';
 import styled from 'styled-components';
 import { TiEye } from 'react-icons/ti';
 import { color } from '../../styles/color';
 import { vars } from '../../styles/vars';
+import { Modal } from '../Modal';
 
 const propTypes = {
     data: PropTypes.shape({
@@ -105,7 +106,7 @@ const CardContentDescription = styled.p`
     font-weight: 500;
 `;
 
-const CardContentMoreDescription = styled.button`
+const CardContentCallToAction = styled.button`
     color: ${color.primary};
     background-color: ${color.light};
     border: none;
@@ -116,16 +117,67 @@ const CardContentMoreDescription = styled.button`
     cursor: pointer;
 `;
 
+const CardContentMoreDescriptionWrapper = styled.p`
+    color: ${color.tertary};
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+`;
+
+const CardContentMoreDescriptionTitle = styled.h1`
+    font-size: 1.75rem;
+    text-transform: uppercase;
+`;
+const CardContentMoreDescriptionText = styled.p`
+    width: 60%;
+    overflow: auto;
+    padding-right: ${vars.gutter};
+    color: ${color.ChineseBlack};
+    ::-webkit-scrollbar {
+        width: 0.2em;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: ${color.primary};
+    }
+
+    ::-webkit-scrollbar-track {
+        background: ${color.light};
+    }
+`;
 const Card: FC<InferProps<typeof propTypes>> = ({ data }): JSX.Element => {
+    const [showModalPicture, setShowModalPicture] = useState<boolean>(false);
+    const [showModalDescribe, setShowModalDescribe] = useState<boolean>(false);
+
+    const openModalPicture = (): void => {
+        setShowModalPicture((prev): boolean => !prev);
+    };
+
+    const openModalDescribe = (): void => {
+        setShowModalDescribe((prev): boolean => !prev);
+    };
+
     return (
         <>
             {data && (
                 <>
                     <CardWrapper>
                         <CardHeader>
-                            <CardHeaderIconWrapper>
+                            <Modal
+                                showModal={showModalPicture}
+                                setShowModal={setShowModalPicture}
+                                imagePath={`${data.url}`}
+                            />
+
+                            <CardHeaderIconWrapper onClick={openModalPicture}>
                                 <CardHeaderIcon />
                             </CardHeaderIconWrapper>
+
                             <CardHeaderIllustration>
                                 {data.media_type === MEDIA_VIDEO ? (
                                     <CardHeaderVideo src={`${data.url}`} />
@@ -133,11 +185,19 @@ const Card: FC<InferProps<typeof propTypes>> = ({ data }): JSX.Element => {
                                     <CardHeaderPicture src={`${data.url}`} alt={`${data.title}`} />
                                 )}
                             </CardHeaderIllustration>
+
                             <CardHeaderTitle>{data.title}</CardHeaderTitle>
                         </CardHeader>
+
                         <CardContent>
                             <CardContentDescription>{data.explanation}</CardContentDescription>
-                            <CardContentMoreDescription>Read More</CardContentMoreDescription>
+                            <CardContentCallToAction onClick={openModalDescribe}>Read More</CardContentCallToAction>
+                            <Modal showModal={showModalDescribe} setShowModal={setShowModalDescribe}>
+                                <CardContentMoreDescriptionWrapper>
+                                    <CardContentMoreDescriptionTitle>{data.title}</CardContentMoreDescriptionTitle>
+                                    <CardContentMoreDescriptionText>{data.explanation}</CardContentMoreDescriptionText>
+                                </CardContentMoreDescriptionWrapper>
+                            </Modal>
                         </CardContent>
                     </CardWrapper>
                 </>

@@ -22,10 +22,10 @@ const Spinned = styled.div`
     animation: ${rotate360} 1s linear infinite;
     transform: translateZ(0);
 
-    border-top: 2px solid ${color.primary};
-    border-right: 2px solid ${color.primary};
-    border-bottom: 2px solid ${color.primary};
-    border-left: 3px solid ${color.secondary};
+    border-top: 2px solid ${color.secondary};
+    border-right: 2px solid ${color.secondary};
+    border-bottom: 2px solid ${color.secondary};
+    border-left: 3px solid ${color.primary};
     background: transparent;
     width: 24px;
     height: 24px;
